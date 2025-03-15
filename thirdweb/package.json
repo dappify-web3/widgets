@@ -1,0 +1,31 @@
+{
+  "name": "thirdweb",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "widget:start": "parcel src/index.html",
+    "widget:build": "parcel build src/widgets.js --no-scope-hoist --no-optimize --no-source-maps --dist-dir dist --target browser --public-url ./ --no-content-hash",
+    "widget:test": "parcel public/index.html"
+  },
+  "dependencies": {
+    "next": "15.2.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "thirdweb": "^5.92.1"
+  },
+  "devDependencies": {
+    "buffer": "^6.0.3",
+    "process": "^0.11.10",
+    "parcel": "^2.12.0"
+  },
+  "parcel": {
+    "extends": "@parcel/config-default",
+    "resolvers": ["@parcel/resolver-default"]
+  },
+  "@parcel/resolver-default": {
+    "packageExports": true
+  },
+  "browserslist": [
+    "defaults"
+  ]
+}

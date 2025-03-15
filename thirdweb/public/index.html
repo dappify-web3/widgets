@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ConnectButton Widget Test</title>
+</head>
+<body>
+  <div id="wallet-connect"></div>
+  <script type="module" src="https://dappify-widgets.s3.us-east-1.amazonaws.com/widgets.js"></script>
+  <script type="module">
+    ThirdwebWidgets.ConnectButton("wallet-connect", { chain: "8453", appName: "Test App", appUrl: "https://testapp.com" });
+  </script>
+</body>
+</html>
