@@ -2,34 +2,173 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Dappify Widgets</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dappify - Web3 Widgets Made Simple</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <div id="dappify">
-      <div  id="connect-button" 
-            data-widget="ConnectButton"
-            data-client-id="e9bae73377d43e42aea12c0d07474163"
-            data-theme="light"
-            data-locale="en_US"
-            data-chains="43113,1,137"
-            data-abstraction-enabled="true"
-            data-abstraction-sponsor-gas="true"
-      >
+<body class="bg-gray-900 text-white font-sans antialiased">
+  <!-- Hero Section -->
+  <header class="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500">
+    <div class="text-center px-6">
+      <h1 class="text-5xl md:text-7xl font-bold mb-4 animate-fade-in">Dappify</h1>
+      <p class="text-xl md:text-2xl mb-8 text-gray-100 max-w-2xl mx-auto">
+        Drop-in Web3 widgets for your site. Connect wallets, claim NFTs, and more—no hassle, all power.
+      </p>
+      <div id="connect-button-hero" 
+           data-widget="ConnectButton"
+           data-client-id="e9bae73377d43e42aea12c0d07474163"
+           data-theme="dark"
+           data-chains="43113,1,137"
+           class="inline-block">
       </div>
-      <div  id="claim-button" 
-          data-widget="ClaimButton"
-          data-client-id="e9bae73377d43e42aea12c0d07474163"
-          data-chains="43113"
-          data-contract-address="0xeF155b056299Ba3e98987f37a2CB5518DE0a98F3"
-          data-type="ERC721"
-          data-token-id=""
-          data-claim-quantity="1"
-          data-pay-name=""
-          data-pay-image=""
-          data-disabled="false"
-      >
+    </div>
+  </header>
+
+  <!-- Features Section -->
+  <section class="py-20 bg-gray-800">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-12">Why Dappify?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+          <svg class="w-12 h-12 mb-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          <h3 class="text-xl font-semibold mb-2">Plug & Play</h3>
+          <p class="text-gray-300">Add widgets anywhere with a single line of HTML.</p>
+        </div>
+        <div class="bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+          <svg class="w-12 h-12 mb-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0-2.76 2.24-5 5-5s5 2.24 5 5-2.24 5-5 5-5-2.24-5-5zm-9 0c0-2.76 2.24-5 5-5s5 2.24 5 5-2.24 5-5 5-5-2.24-5-5z"></path>
+          </svg>
+          <h3 class="text-xl font-semibold mb-2">Interconnected</h3>
+          <p class="text-gray-300">Widgets share wallet state seamlessly.</p>
+        </div>
+        <div class="bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+          <svg class="w-12 h-12 mb-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+          </svg>
+          <h3 class="text-xl font-semibold mb-2">Customizable</h3>
+          <p class="text-gray-300">Tailor chains, themes, and more with ease.</p>
+        </div>
       </div>
-  </div>
-  <script type="module" src="./widgets.js"></script>
+    </div>
+  </section>
+
+  <!-- Get Started Section -->
+  <section class="py-20 bg-gray-900">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-12">Get Started in Seconds</h2>
+
+      <!-- Prerequisite: Script Import -->
+      <div class="mb-12 bg-gray-800 p-6 rounded-lg shadow-lg">
+        <h3 class="text-2xl font-semibold mb-4 text-indigo-300">Step 1: Add the Script</h3>
+        <p class="text-gray-400 mb-4">Insert this script tag just before the closing <code class="font-mono text-purple-400">&lt;/body&gt;</code> tag:</p>
+        <pre class="bg-gray-900 p-4 rounded-md text-sm font-mono text-gray-200 overflow-x-auto">
+<span class="text-purple-400">&lt;script</span> <span class="text-green-400">src=</span><span class="text-orange-300">"https://unpkg.com/@dappify/thirdweb@0.1.0/dist/widgets.js"</span><span class="text-purple-400">&gt;&lt;/script&gt;</span>
+        </pre>
+        <p class="text-gray-400 mt-4">This enables all Dappify widgets on your page.</p>
+      </div>
+
+      <!-- Widget Examples -->
+      <div class="space-y-12" >
+        <!-- Connect Button Example -->
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+          <h3 class="text-2xl font-semibold mb-4 text-indigo-300">Connect Wallet Widget</h3>
+          <p class="text-gray-400 mb-4">Use this exact code to add the Connect Button (as seen in the Hero):</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <pre class="bg-gray-900 p-4 rounded-md text-sm font-mono text-gray-200 overflow-x-auto">
+<span class="text-purple-400">&lt;div</span> <span class="text-green-400">id=</span><span class="text-orange-300">"connect-button-hero"</span>
+     <span class="text-green-400">data-widget=</span><span class="text-orange-300">"ConnectButton"</span>
+     <span class="text-green-400">data-client-id=</span><span class="text-orange-300">"e9bae73377d43e42aea12c0d07474163"</span>
+     <span class="text-green-400">data-theme=</span><span class="text-orange-300">"dark"</span>
+     <span class="text-green-400">data-chains=</span><span class="text-orange-300">"43113,1,137"</span><span class="text-purple-400">&gt;&lt;/div&gt;</span>
+            </pre>
+            <div class="flex items-center justify-center" id="dappify">
+              <div id="connect-button-demo" 
+                   data-widget="ConnectButton"
+                   data-client-id="e9bae73377d43e42aea12c0d07474163"
+                   data-theme="dark"
+                   data-chains="43113,1,137">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Claim Button Example -->
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+          <h3 class="text-2xl font-semibold mb-4 text-indigo-300">Claim NFT Widget</h3>
+          <p class="text-gray-400 mb-4">Use this exact code to add the Claim Button (as seen below):</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <pre class="bg-gray-900 p-4 rounded-md text-sm font-mono text-gray-200 overflow-x-auto">
+<span class="text-purple-400">&lt;div</span> <span class="text-green-400">id=</span><span class="text-orange-300">"claim-button-main"</span>
+     <span class="text-green-400">data-widget=</span><span class="text-orange-300">"ClaimButton"</span>
+     <span class="text-green-400">data-client-id=</span><span class="text-orange-300">"e9bae73377d43e42aea12c0d07474163"</span>
+     <span class="text-green-400">data-chains=</span><span class="text-orange-300">"43113"</span>
+     <span class="text-green-400">data-contract-address=</span><span class="text-orange-300">"0xeF155b056299Ba3e98987f37a2CB5518DE0a98F3"</span>
+     <span class="text-green-400">data-type=</span><span class="text-orange-300">"ERC721"</span>
+     <span class="text-green-400">data-claim-quantity=</span><span class="text-orange-300">"1"</span><span class="text-purple-400">&gt;&lt;/div&gt;</span>
+            </pre>
+            <div class="flex items-center justify-center" id="dappify">
+              <div id="claim-button-demo" 
+                   data-widget="ClaimButton"
+                   data-client-id="e9bae73377d43e42aea12c0d07474163"
+                   data-chains="43113"
+                   data-contract-address="0xeF155b056299Ba3e98987f37a2CB5518DE0a98F3"
+                   data-type="ERC721"
+                   data-claim-quantity="1">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Claim Section -->
+  <section class="py-20 bg-gray-800">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="text-4xl font-bold mb-6">Claim Your Free NFT</h2>
+      <p class="text-lg text-gray-400 mb-8">Experience Dappify’s power with a test NFT claim.</p>
+      <div id="claim-button-main" 
+           data-widget="ClaimButton"
+           data-client-id="e9bae73377d43e42aea12c0d07474163"
+           data-chains="43113"
+           data-contract-address="0xeF155b056299Ba3e98987f37a2CB5518DE0a98F3"
+           data-type="ERC721"
+           data-claim-quantity="1"
+           class="inline-block">
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-10 bg-gray-900 text-center">
+    <p class="text-gray-400">© 2025 Dappify. Built with ❤️ by xAI.</p>
+    <div class="mt-4 space-x-4">
+      <a href="#" class="text-indigo-400 hover:text-indigo-300">Docs</a>
+      <a href="#" class="text-indigo-400 hover:text-indigo-300">GitHub</a>
+      <a href="#" class="text-indigo-400 hover:text-indigo-300">Contact</a>
+    </div>
+  </footer>
+
+  <!-- Dappify Widgets Script (Prerequisite) -->
+  <!-- CDN -->
+  <!-- <script src="https://unpkg.com/@dappify/thirdweb@0.1.0/dist/widgets.js"></script> -->
+  <!-- Local dist -->
+  <!-- <script src="../dist/widgets.js"></script>  -->
+  <!-- Local dev -->
+  <script type="module" src="./widgets.js"></script> 
+
+  <!-- Custom Animation -->
+  <style>
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .animate-fade-in {
+      animation: fade-in 1s ease-in-out;
+    }
+  </style>
 </body>
 </html>

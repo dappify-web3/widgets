@@ -1,11 +1,10 @@
 {
-  "name": "thirdweb",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@dappify/thirdweb",
+  "version": "0.1.1",
+  "main": "dist/widgets.js",
   "scripts": {
-    "widget:start": "parcel src/index.html",
-    "widget:build": "parcel build src/widgets.js --no-scope-hoist --no-optimize --no-source-maps --dist-dir dist --target browser --public-url ./ --no-content-hash",
-    "widget:test": "parcel public/index.html"
+    "start": "parcel src/index.html",
+    "build": "parcel build src/widgets.js --no-scope-hoist --no-optimize --no-source-maps --dist-dir dist --public-url ./ --no-content-hash"
   },
   "dependencies": {
     "next": "15.2.2",
