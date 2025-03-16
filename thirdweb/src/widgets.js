@@ -1,14 +1,23 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { createRoot } from "react-dom/client";
-import { ThirdwebProvider, ConnectButton, ClaimButton } from "thirdweb/react";
+import { createPortal } from "react-dom";
+import { ThirdwebProvider } from "thirdweb/react";
 import * as availableChains from "thirdweb/chains";
 import { createThirdwebClient } from "thirdweb";
+
+// Lazy-loaded widget components
+const ConnectButton = lazy(() => import("thirdweb/react").then((mod) => ({ default: mod.ConnectButton })));
+const ClaimButton = lazy(() => import("thirdweb/react").then((mod) => ({ default: mod.ClaimButton })));
 
 // Map of widget names to their components
 const widgetComponents = {
   ConnectButton,
   ClaimButton,
 };
+
+// Singleton ThirdwebProvider management
+let providerRoot = null;
+let providerContainer = null;
 
 // Function to parse widget props from data attributes
 const getWidgetProps = (element) => {
@@ -44,10 +53,9 @@ const getWidgetProps = (element) => {
     client: createThirdwebClient({ clientId }),
     chains: enabledChains.length ? enabledChains : [defaultChain],
     chain: defaultChain,
-    disabled: disabled === "false" ? false : undefined, // Only set if explicitly false
+    disabled: disabled === "false" ? false : undefined,
   };
 
-  // Add ClaimButton-specific props
   if (element.dataset.widget === "ClaimButton") {
     return {
       ...baseProps,
@@ -63,56 +71,83 @@ const getWidgetProps = (element) => {
   return baseProps;
 };
 
+// Widget wrapper component using Portal
+const WidgetWrapper = ({ element }) => {
+  const widgetName = element.dataset.widget;
+  const Component = widgetComponents[widgetName];
+  if (!Component) {
+    console.warn(`Unknown widget: ${widgetName}`);
+    return null;
+  }
+
+  const props = getWidgetProps(element);
+  return createPortal(
+    <Suspense fallback={<div>Loading...</div>}>
+      <Component {...props}>
+        {widgetName === "ClaimButton" ? "Claim Now" : null}
+      </Component>
+    </Suspense>,
+    element
+  );
+};
+
 // Main widget initialization
 const initWidgets = () => {
-  const appContainer = document.getElementById("dappify");
-  if (!appContainer) {
-    console.error("Container #dappify not found");
-    return;
-  }
-
-  const widgetElements = appContainer.querySelectorAll("[data-widget]");
+  const widgetElements = Array.from(document.querySelectorAll("[data-widget]"));
   if (widgetElements.length === 0) {
-    console.warn("No widgets found in #dappify");
+    console.warn("No widgets found on the page");
     return;
   }
 
-  // Use the first widget's clientId and chains as defaults for the provider
-  const { clientId, chains } = widgetElements[0].dataset;
-  const enabledChains = chains
-    ?.split(",")
-    .map((id) => availableChains.defineChain({ id: parseInt(id) }))
-    .filter(Boolean);
-  const defaultChain = enabledChains?.[0] || availableChains.Mainnet;
+  // Initialize singleton ThirdwebProvider if not already done
+  if (!providerRoot) {
+    providerContainer = document.createElement("div");
+    providerContainer.style.display = "none"; // Hidden container for provider root
+    document.body.appendChild(providerContainer);
+    providerRoot = createRoot(providerContainer);
 
-  const root = createRoot(appContainer);
-  root.render(
-    <ThirdwebProvider
-      clientId={clientId}
-      supportedChains={enabledChains.length ? enabledChains : [defaultChain]}
-      activeChain={defaultChain}
-    >
-      {Array.from(widgetElements).map((element) => {
-        const widgetName = element.dataset.widget;
-        const Component = widgetComponents[widgetName];
-        if (!Component) {
-          console.warn(`Unknown widget: ${widgetName}`);
-          return null;
+    const { clientId, chains } = widgetElements[0].dataset;
+    const enabledChains = chains
+      ?.split(",")
+      .map((id) => availableChains.defineChain({ id: parseInt(id) }))
+      .filter(Boolean);
+    const defaultChain = enabledChains?.[0] || availableChains.Mainnet;
+
+    providerRoot.render(
+      <ThirdwebProvider
+        clientId={clientId}
+        supportedChains={enabledChains.length ? enabledChains : [defaultChain]}
+        activeChain={defaultChain}
+      >
+        {widgetElements.map((element) => (
+          <WidgetWrapper key={element.id || Math.random().toString(36).substr(2)} element={element} />
+        ))}
+      </ThirdwebProvider>
+    );
+  } else {
+    // Update existing provider with new widgets if more are added dynamically
+    providerRoot.render(
+      <ThirdwebProvider
+        clientId={widgetElements[0].dataset.clientId}
+        supportedChains={
+          widgetElements[0].dataset.chains
+            ?.split(",")
+            .map((id) => availableChains.defineChain({ id: parseInt(id) }))
+            .filter(Boolean) || [availableChains.Mainnet]
         }
-
-        const props = getWidgetProps(element);
-        console.log(`Rendering ${widgetName} with props:`, props);
-
-        return (
-          <div key={element.id} id={element.id}>
-            <Component {...props}>
-              {widgetName === "ClaimButton" ? "Claim Now" : null}
-            </Component>
-          </div>
-        );
-      })}
-    </ThirdwebProvider>
-  );
+        activeChain={
+          widgetElements[0].dataset.chains
+            ?.split(",")
+            .map((id) => availableChains.defineChain({ id: parseInt(id) }))
+            .filter(Boolean)?.[0] || availableChains.Mainnet
+        }
+      >
+        {widgetElements.map((element) => (
+          <WidgetWrapper key={element.id || Math.random().toString(36).substr(2)} element={element} />
+        ))}
+      </ThirdwebProvider>
+    );
+  }
 };
 
 // Run initialization
@@ -122,6 +157,6 @@ if (document.readyState === "complete") {
   window.addEventListener("load", initWidgets);
 }
 
-// Export for ESM (optional, if needed elsewhere)
+// Export for ESM
 export { initWidgets as ThirdwebWidgets };
 window.ThirdwebWidgets = { init: initWidgets };
