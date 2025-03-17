@@ -3,7 +3,9 @@ name: Deploy Site to GitHub Pages
 on:
   push:
     branches: [ main ]
-  workflow_dispatch:
+    paths:
+      - 'site/**'  # Trigger only on changes to site/ folder and subdirectories
+  workflow_dispatch:  # Still allow manual runs
 
 permissions:
   contents: write  # Grant write access to repository contents
