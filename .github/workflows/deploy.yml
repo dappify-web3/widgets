@@ -3,7 +3,10 @@ name: Deploy Site to GitHub Pages
 on:
   push:
     branches: [ main ]
-  workflow_dispatch: # Allow manual trigger
+  workflow_dispatch:
+
+permissions:
+  contents: write  # Grant write access to repository contents
 
 jobs:
   deploy:
@@ -17,4 +20,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./site/public
-          cname: dappify.com  # Replace with your custom domain
+          cname: www.yourdomain.com  # Replace with your custom domain
