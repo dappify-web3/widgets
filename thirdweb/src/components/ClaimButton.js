@@ -1,6 +1,6 @@
 import * as availableChains from "thirdweb/chains";
 import { createThirdwebClient } from "thirdweb";
-import { ClaimButton as ThirdwebClaimButton } from "thirdweb/react";
+import { ClaimButton as ThirdwebComponent } from "thirdweb/react";
 
 export const getProps = (element) => {
   const { clientId, theme, chains, contractAddress, type, claimQuantity, tokenId } = element.dataset;
@@ -21,4 +21,4 @@ export const getProps = (element) => {
   };
 };
 
-export const getComponent = () => ThirdwebClaimButton;
+export const getComponent = () => ThirdwebComponent;

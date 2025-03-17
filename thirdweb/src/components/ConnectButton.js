@@ -1,6 +1,6 @@
 import * as availableChains from "thirdweb/chains";
 import { createThirdwebClient } from "thirdweb";
-import { ConnectButton as ThirdwebConnectButton } from "thirdweb/react";
+import { ConnectButton as ThirdwebComponent } from "thirdweb/react";
 
 export const getProps = (element) => {
   const { clientId, theme, chains, disabled } = element.dataset;
@@ -15,4 +15,4 @@ export const getProps = (element) => {
   };
 };
 
-export const getComponent = () => ThirdwebConnectButton;
+export const getComponent = () => ThirdwebComponent;
