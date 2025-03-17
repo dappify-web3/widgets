@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Widget Test</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 min-h-screen flex items-center justify-center">
+  <div class="space-y-12 text-white">
+    <div class="text-center">
+      <h2 class="text-xl font-semibold mb-4">Connect Wallet</h2>
+      <div id="connect-button-demo" 
+           data-widget="ConnectButton"
+           data-client-id="e9bae73377d43e42aea12c0d07474163"
+           data-theme="dark"
+           data-chains="43113,1,137">
+      </div>
+    </div>
+    <div class="text-center">
+      <h2 class="text-xl font-semibold mb-4">Claim NFT</h2>
+      <div id="claim-button-demo" 
+           data-widget="ClaimButton"
+           data-client-id="e9bae73377d43e42aea12c0d07474163"
+           data-chains="43113"
+           data-contract-address="0xeF155b056299Ba3e98987f37a2CB5518DE0a98F3"
+           data-type="ERC721"
+           data-claim-quantity="1">
+      </div>
+    </div>
+  </div>
+  <!-- For local testing before bundling -->
+  <script type="module" src="./src/widgets.js"></script>
+  <!-- For CDN after bundling -->
+  <!-- <script src="./dist/widgets.js"></script> -->
+</body>
+</html>

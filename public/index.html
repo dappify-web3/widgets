@@ -8,48 +8,30 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-900 text-white font-sans antialiased">
-  <!-- Hero Section -->
-  <header class="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500">
-    <div class="text-center px-6">
-      <h1 class="text-5xl md:text-7xl font-bold mb-4 animate-fade-in">Dappify</h1>
-      <p class="text-xl md:text-2xl mb-8 text-gray-100 max-w-2xl mx-auto">
-        Drop-in Web3 widgets for your site. Connect wallets, claim NFTs, and more—no hassle, all power.
-      </p>
-    </div>
-  </header>
 
-  <!-- Features Section -->
-  <section class="py-20 bg-gray-800">
-    <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-4xl font-bold text-center mb-12">Why Dappify?</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-          <svg class="w-12 h-12 mb-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-          <h3 class="text-xl font-semibold mb-2">Plug & Play</h3>
-          <p class="text-gray-300">Add widgets anywhere with a single line of HTML.</p>
-        </div>
-        <div class="bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-          <svg class="w-12 h-12 mb-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0-2.76 2.24-5 5-5s5 2.24 5 5-2.24 5-5 5-5-2.24-5-5zm-9 0c0-2.76 2.24-5 5-5s5 2.24 5 5-2.24 5-5 5-5-2.24-5-5z"></path>
-          </svg>
-          <h3 class="text-xl font-semibold mb-2">Interconnected</h3>
-          <p class="text-gray-300">Widgets share wallet state seamlessly.</p>
-        </div>
-        <div class="bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-          <svg class="w-12 h-12 mb-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-          </svg>
-          <h3 class="text-xl font-semibold mb-2">Customizable</h3>
-          <p class="text-gray-300">Tailor chains, themes, and more with ease.</p>
-        </div>
-      </div>
+
+<!-- Hero Section -->
+<header class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-600 via-amber-400 to-purple-600 overflow-hidden">
+  <!-- Background Elements -->
+  <div class="absolute inset-0 pointer-events-none">
+    <!-- Animated Logo-Inspired Shapes -->
+    <div class="w-64 h-64 bg-purple-600/10 rounded-lg transform rotate-45 opacity-50 blur-md absolute top-1/4 left-10 animate-float"></div>
+    <div class="w-48 h-48 bg-orange-500/10 rounded-lg transform -rotate-30 opacity-50 blur-md absolute bottom-1/4 right-10 animate-float delay-1000"></div>
+  </div>
+  <div class="text-center px-6 z-10 relative">
+    <!-- Logo with Enhanced Visibility -->
+    <div class="mb-6 p-4">
+      <img src="./assets/dappify-logo.png" alt="Dappify Logo" class="mx-auto h-60 animate-fade-in" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
     </div>
-  </section>
+    <p class="text-4xl md:text-5xl mb-8 text-gray-100 max-w-4xl mx-auto font-medium animate-fade-in delay-200">
+      Drop Dappify widgets anywhere and instantly add wallet connections, NFT claims, and more!
+    </p>
+    <a href="#how-it-works" class="mt-6 inline-block bg-gradient-to-r from-orange-500 to-purple-600 text-white font-semibold py-3 px-10 rounded-full hover:from-orange-400 hover:to-purple-500 transition-all animate-fade-in delay-400 text-lg">Get Started Now</a>
+  </div>
+</header>
 
   <!-- Get Started Section -->
-  <section class="py-20 bg-gray-900">
+  <section class="py-20 bg-gray-900" id="how-it-works">
     <div class="max-w-6xl mx-auto px-6">
       <h2 class="text-4xl font-bold text-center mb-12">Get Started in Seconds</h2>
 
@@ -58,7 +40,7 @@
         <h3 class="text-2xl font-semibold mb-4 text-indigo-300">Step 1: Add the Script</h3>
         <p class="text-gray-400 mb-4">Insert this script tag just before the closing <code class="font-mono text-purple-400">&lt;/body&gt;</code> tag:</p>
         <pre class="bg-gray-900 p-4 rounded-md text-sm font-mono text-gray-200 overflow-x-auto">
-<span class="text-purple-400">&lt;script</span> <span class="text-green-400">src=</span><span class="text-orange-300">"https://unpkg.com/@dappify/thirdweb@0.1.0/dist/widgets.js"</span><span class="text-purple-400">&gt;&lt;/script&gt;</span>
+<span class="text-purple-400">&lt;script</span> <span class="text-green-400">src=</span><span class="text-orange-300">"https://unpkg.com/@dappify/thirdweb@latest/dist/widgets.js"</span><span class="text-purple-400">&gt;&lt;/script&gt;</span>
         </pre>
         <p class="text-gray-400 mt-4">This enables all Dappify widgets on your page.</p>
       </div>
@@ -119,10 +101,10 @@
   </section>
 
   <!-- Claim Section -->
-  <section class="py-20 bg-gray-800">
+  <!-- <section class="py-20 bg-gray-800">
     <div class="max-w-4xl mx-auto px-6 text-center">
       <h2 class="text-4xl font-bold mb-6">Claim Your Free NFT</h2>
-      <p class="text-lg text-gray-400 mb-8">Experience Dappify’s power with a test NFT claim.</p>
+      <p class="text-lg text-gray-400 mb-8">Experience Dappify’s power with a test NFT claim.</p> -->
       <!-- <div id="claim-button-main" 
            data-widget="ClaimButton"
            data-client-id="e9bae73377d43e42aea12c0d07474163"
@@ -132,12 +114,12 @@
            data-claim-quantity="1"
            class="inline-block">
       </div> -->
-    </div>
-  </section>
+    <!-- </div>
+  </section> -->
 
   <!-- Footer -->
   <footer class="py-10 bg-gray-900 text-center">
-    <p class="text-gray-400">© 2025 Dappify. Built with ❤️ by xAI.</p>
+    <p class="text-gray-400">© 2025 Built with ❤️ by Dappify.</p>
     <div class="mt-4 space-x-4">
       <a href="#" class="text-indigo-400 hover:text-indigo-300">Docs</a>
       <a href="#" class="text-indigo-400 hover:text-indigo-300">GitHub</a>
@@ -146,15 +128,13 @@
   </footer>
 
   <!-- Dappify Widgets Script (Prerequisite) -->
-  <!-- CDN -->
-  <!-- <script src="https://unpkg.com/@dappify/thirdweb@0.1.0/dist/widgets.js"></script> -->
-  <!-- Local dist -->
-  <!-- <script src="../dist/widgets.js"></script>  -->
-  <!-- Local dev -->
-  <script type="module" src="./widgets.js"></script> 
+  <script src="https://unpkg.com/@dappify/thirdweb@0.1.1/dist/widgets.js"></script>
 
   <!-- Custom Animation -->
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
     @keyframes fade-in {
       from { opacity: 0; }
       to { opacity: 1; }
