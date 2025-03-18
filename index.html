@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V7HG26C7GR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V7HG26C7GR');
+  </script>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dappify - Web3 Widgets Made Simple</title>
@@ -12,24 +23,48 @@
 
 <!-- Hero Section -->
 <header class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-600 via-amber-400 to-purple-600 overflow-hidden">
+  <!-- Logo and Text in Top Left Corner -->
+  <div class="absolute top-4 left-4 z-20 flex items-center">
+    <img src="./assets/dappify-logo.png" alt="Dappify Logo" class="h-10 w-10 mr-2" onerror="this.style.display='none';">
+    <span class="text-gray-100 text-xl font-semibold">Dappify</span>
+  </div>
+
   <!-- Background Elements -->
   <div class="absolute inset-0 pointer-events-none">
     <!-- Animated Logo-Inspired Shapes -->
-    <div class="w-64 h-64 bg-purple-600/10 rounded-lg transform rotate-45 opacity-50 blur-md absolute top-1/4 left-10 animate-float"></div>
-    <div class="w-48 h-48 bg-orange-500/10 rounded-lg transform -rotate-30 opacity-50 blur-md absolute bottom-1/4 right-10 animate-float delay-1000"></div>
+    <div class="w-32 md:w-64 h-32 md:h-64 bg-purple-600/10 rounded-lg transform rotate-45 opacity-50 blur-md absolute top-1/4 left-5 md:left-10 animate-float"></div>
+    <div class="w-24 md:w-48 h-24 md:h-48 bg-orange-500/10 rounded-lg transform -rotate-30 opacity-50 blur-md absolute bottom-1/4 right-5 md:right-10 animate-float delay-1000"></div>
   </div>
-  <div class="text-center px-6 z-10 relative">
-    <!-- Logo with Enhanced Visibility -->
-    <div class="mb-6 p-4">
-      <img src="./assets/dappify-logo.png" alt="Dappify Logo" class="mx-auto h-60 animate-fade-in" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+
+  <!-- Content Container -->
+  <div class="container mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between z-10 relative">
+    <!-- Text Content -->
+    <div class="w-full md:w-full lg:w-3/5 text-center md:text-left animate-fade-in">
+      <h1 class="text-4xl sm:text-6xl md:text-8xl mb-6 text-gray-100 font-medium">
+        Drop Dappify Web3<br>widgets anywhere
+      </h1>
+      <h1 class="text-xl sm:text-2xl md:text-4xl mb-6 text-gray-100 font-medium">
+        Instantly add wallet connections, NFT claims,<br>
+        token gating and more, all without code!
+      </h1>
+      <a href="#how-it-works" class="inline-block bg-gradient-to-r from-orange-500 to-purple-600 text-white font-semibold py-2 sm:py-3 px-6 sm:px-10 rounded-full hover:from-orange-400 hover:to-purple-500 transition-all animate-fade-in delay-400 text-base sm:text-lg">
+        Get Started Now
+      </a>
     </div>
-    <p class="text-4xl md:text-5xl mb-8 text-gray-100 max-w-4xl mx-auto font-medium animate-fade-in delay-200">
-      Drop Dappify widgets anywhere and instantly add wallet connections, NFT claims, and more!
-    </p>
-    <a href="#how-it-works" class="mt-6 inline-block bg-gradient-to-r from-orange-500 to-purple-600 text-white font-semibold py-3 px-10 rounded-full hover:from-orange-400 hover:to-purple-500 transition-all animate-fade-in delay-400 text-lg">Get Started Now</a>
+
+    <!-- Images -->
+    <div class="w-full md:w-full lg:w-2/5 mt-8 md:mt-12 lg:mt-0 flex justify-center md:justify-end items-center relative -mr-24">
+      <!-- Mobile Screen GIF (Result) -->
+      <div class="relative z-10 shadow-lg rounded-lg p-4 w-3/5 sm:w-3/5">
+        <img src="./assets/screen.gif" alt="Mobile Web3 login" class="rounded-lg animate-fade-in delay-200 w-full" onerror="this.style.display='none';">
+      </div>
+      <!-- Editor Image (Code Snippet) - On Top -->
+      <div class="absolute transform -translate-x-10 sm:-translate-x-16 translate-y-36 z-20">
+        <img src="./assets/editor.png" alt="Code snippet in editor" class="w-3/5 sm:w-3/5 shadow-lg rounded-lg animate-fade-in delay-400" onerror="this.style.display='none';">
+      </div>
+    </div>
   </div>
 </header>
-
   <!-- Get Started Section -->
   <section class="py-20 bg-gray-900" id="how-it-works">
     <div class="max-w-6xl mx-auto px-6">
@@ -121,9 +156,9 @@
   <footer class="py-10 bg-gray-900 text-center">
     <p class="text-gray-400">© 2025 Built with ❤️ by Dappify.</p>
     <div class="mt-4 space-x-4">
-      <a href="#" class="text-indigo-400 hover:text-indigo-300">Docs</a>
-      <a href="#" class="text-indigo-400 hover:text-indigo-300">GitHub</a>
-      <a href="#" class="text-indigo-400 hover:text-indigo-300">Contact</a>
+      <a href="mailto:giancarlo@dappify.com" class="text-indigo-400 hover:text-indigo-300">Email me</a>
+      <a href="https://github.com/gianksp/dappify" class="text-indigo-400 hover:text-indigo-300">GitHub</a>
+      <a href="https://discord.gg/7xw8ZNQAWS" class="text-indigo-400 hover:text-indigo-300">Discord</a>
     </div>
   </footer>
 
