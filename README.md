@@ -1,4 +1,4 @@
-![Dappify](https://s6.gifyu.com/images/bzLir.gif)
+![Dappify](https://i.ibb.co/TMxwn3d2/Dappify-Banner.png)
 
 Welcome to **[Dappify](https://github.com)**, a library for seamlessly integrating Web3 functionality into any webpage. Powered by Thirdweb, Dappify provides drop-in widgets like ConnectButton and ClaimButton to connect wallets, claim NFTs, and more—all with minimal setup and maximum flexibility and without having to write code.
 
@@ -79,7 +79,7 @@ Add a `ClaimButton` to allow users to claim NFTs from your contract
 - `data-claim-quantity`: Number of NFTs to claim per action (e.g., "1").
 
 ### Example NFT Minting Landing Page Template
-Here’s a full HTML snippet showcasing both widgets
+Here’s a full HTML snippet showcasing widgets
 ```
 <!DOCTYPE html>
 <html lang="en">
@@ -89,27 +89,25 @@ Here’s a full HTML snippet showcasing both widgets
   <title>Dappify Demo</title>
 </head>
 <body>
-  <div id="dappify">
     <h1>Explore Web3 with Dappify</h1>
     <p>Start by connecting your wallet:</p>
     <div id="wallet-connect"
-         data-widget="ConnectButton"
-         data-client-id="your-thirdweb-client-id"
-         data-theme="dark"
-         data-chains="43113,1,137"
-         class="inline-block">
+            data-widget="ConnectButton"
+            data-client-id="your-thirdweb-client-id"
+            data-theme="dark"
+            data-chains="43113,1,137"
+            class="inline-block">
     </div>
     <p>Then grab your NFT:</p>
     <div id="nft-claim"
-         data-widget="ClaimButton"
-         data-client-id="your-thirdweb-client-id"
-         data-chains="43113"
-         data-contract-address="your-contract-address"
-         data-type="ERC721"
-         data-claim-quantity="1"
-         class="inline-block">
+            data-widget="ClaimButton"
+            data-client-id="your-thirdweb-client-id"
+            data-chains="43113"
+            data-contract-address="your-contract-address"
+            data-type="ERC721"
+            data-claim-quantity="1"
+            class="inline-block">
     </div>
-  </div>
   <script src="https://unpkg.com/@dappify/thirdweb@0.1.0/dist/widgets.js"></script>
 </body>
 </html>
