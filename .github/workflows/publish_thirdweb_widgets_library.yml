@@ -22,11 +22,14 @@ jobs:
 
       - name: Install dependencies
         run: npm install # Shortened to npm i in your original, both work
+        working-directory: thirdweb # Navigate to the thirdweb folder
 
       - name: Build the library
         run: npm run build
+        working-directory: thirdweb # Navigate to the thirdweb folder
 
       - name: Publish to NPM
         uses: JS-DevTools/npm-publish@v3
         with:
           token: ${{ secrets.NPM_TOKEN }} # Ensure this secret is set in GitHub repo settings
+          package: thirdweb/package.json # Specify the package.json location
