@@ -1,0 +1,32 @@
+name: Publish library to NPM
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'thirdweb/**' # Trigger only when thirdweb changes
+  workflow_dispatch: # Allow manual triggering from GitHub UI
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org" # Ensures NPM is the target registry
+
+      - name: Install dependencies
+        run: npm install # Shortened to npm i in your original, both work
+
+      - name: Build the library
+        run: npm run build
+
+      - name: Publish to NPM
+        uses: JS-DevTools/npm-publish@v3
+        with:
+          token: ${{ secrets.NPM_TOKEN }} # Ensure this secret is set in GitHub repo settings
