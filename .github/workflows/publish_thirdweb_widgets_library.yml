@@ -26,10 +26,6 @@ jobs:
       - name: Install dependencies
         run: npm install
         working-directory: thirdweb
-
-      - name: Debug directory structure
-        run: pwd && ls -la && ls -la thirdweb/
-        working-directory: thirdweb
   
       - name: Run tests with coverage
         run: npm run test
