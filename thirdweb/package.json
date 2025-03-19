@@ -35,7 +35,13 @@
       "jsx"
     ],
     "collectCoverage": true,
-    "coverageReporters": ["json-summary", "text"],
+    "coverageReporters": [
+      "json-summary",
+      "json",
+      "text",
+      "html",
+      "lcov"
+    ],
     "coverageDirectory": "coverage",
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
