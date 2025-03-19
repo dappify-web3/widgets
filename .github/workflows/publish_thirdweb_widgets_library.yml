@@ -4,11 +4,11 @@ on:
   push:
     branches: [ main ]
     paths:
-      - 'thirdweb/**'
+      - '**'  # Trigger on any changes, since files are at root
   workflow_dispatch:
 
 permissions:
-  contents: write  # Allow writing to repository contents (e.g., pushing to gh-pages)
+  contents: write
 
 jobs:
   publish:
@@ -24,41 +24,36 @@ jobs:
           registry-url: "https://registry.npmjs.org"
 
       - name: Install dependencies
-        run: npm install
-        working-directory: thirdweb
+        run: npm install  # Runs at root
 
       - name: Debug directory structure
-        run: pwd && ls -la && ls -la thirdweb/
-        working-directory: thirdweb
-  
+        run: pwd && ls -la  # List root directory contents
+
       - name: Run tests with coverage
-        run: npm run test
-        working-directory: thirdweb # Ensure tests run in thirdweb/
+        run: npm run test  # Runs at root
 
       - name: Generate coverage badge
         uses: jaywcjlove/coverage-badges-cli@main
         with:
-          source: thirdweb/coverage/coverage-summary.json # Adjust path to thirdweb/
-          output: thirdweb/coverage/badges.svg # Keep badge in thirdweb/coverage/
+          source: coverage/coverage-summary.json  # Path from root
+          output: coverage/badges.svg
 
       - name: Extract version and generate version badge
         run: |
-          VERSION=$(node -p "require('./thirdweb/package.json').version")
-          npx badge-maker "Version" "$VERSION" blue > thirdweb/coverage/version.svg
-        working-directory: .
+          VERSION=$(node -p "require('./package.json').version")
+          npx badge-maker "Version" "$VERSION" blue > coverage/version.svg
 
       - name: Build the library
-        run: npm run build
-        working-directory: thirdweb
+        run: npm run build  # Runs at root
 
       - name: Publish to NPM
         uses: JS-DevTools/npm-publish@v3
         with:
           token: ${{ secrets.NPM_TOKEN }}
-          package: thirdweb/package.json
+          package: package.json  # Path from root
 
-      - name: Deploy badge to GitHub Pages
+      - name: Deploy badges to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./thirdweb/coverage # Adjust to thirdweb/coverage/
+          publish_dir: ./coverage  # Path from root
