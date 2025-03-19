@@ -1,0 +1,17 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Run tests with coverage
+npm run test:cov -- --silent
+
+# Extract total coverage percentage (statements) from coverage-summary.json
+COVERAGE=$(node -e "const cov = require('./coverage/coverage-summary.json'); console.log(cov.total.statements.pct);")
+
+# Check if coverage is below 100%
+if [ "$(echo "$COVERAGE < 100" | bc)" -eq 1 ]; then
+  echo "Error: Test coverage is $COVERAGE%, which is below 100%. Commit aborted."
+  exit 1
+fi
+
+echo "Coverage is $COVERAGE%. Proceeding with commit."
+exit 0

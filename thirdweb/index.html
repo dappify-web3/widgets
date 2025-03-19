@@ -13,8 +13,11 @@
       <div id="connect-button-demo" 
            data-widget="ConnectButton"
            data-client-id="e9bae73377d43e42aea12c0d07474163"
+           data-chains="43113,1,137"
            data-theme="dark"
-           data-chains="43113,1,137">
+           data-locale="en_US"
+           data-label="🔥Sign In"
+      >
       </div>
     </div>
     <div class="text-center">
@@ -23,15 +26,17 @@
            data-widget="ClaimButton"
            data-client-id="e9bae73377d43e42aea12c0d07474163"
            data-chains="43113"
+           data-theme="dark"
+           data-label="🔥Mint NFT!"
            data-contract-address="0xeF155b056299Ba3e98987f37a2CB5518DE0a98F3"
            data-type="ERC721"
-           data-claim-quantity="1">
+           data-quantity=1>
       </div>
     </div>
   </div>
   <!-- For local testing before bundling -->
-  <!-- <script type="module" src="./src/widgets.js"></script> -->
+  <script type="module" src="./src/widgets.js"></script>
   <!-- For CDN after bundling -->
-  <script type="module" src="./dist/widgets.js"></script>
+  <!-- <script type="module" src="./dist/widgets.js"></script> -->
 </body>
 </html>

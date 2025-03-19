@@ -1,4 +1,5 @@
 ## Thirdweb Widgets
+[![Thirdweb Widgets Library Coverage](https://dappify-web3.github.io/dappify/badges.svg)](https://github.com/dappify-web3/dappify/actions)
 
 These are [Thirdweb](https://thirdweb.com) UI components that are encapsulated and exposed as html components that can be embedded into any website without coding.Context and Provider management is also supported, allowing these components to talk between each other.
 
