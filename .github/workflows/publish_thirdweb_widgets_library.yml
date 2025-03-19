@@ -33,28 +33,25 @@ jobs:
 
       - name: Generate coverage badge
         uses: jaywcjlove/coverage-badges-cli@main
+        working-directory: thirdweb
         with:
-          source: thirdweb/coverage/coverage-summary.json # Adjust path to thirdweb/
-          output: thirdweb/coverage/badges.svg # Keep badge in thirdweb/coverage/
+          source: coverage/coverage-summary.json # Adjust path to thirdweb/
+          output: coverage/badges.svg # Keep badge in thirdweb/coverage/
 
-      - name: Extract version and generate version badge
-        run: |
-          VERSION=$(node -p "require('./package.json').version")
-          npx badge-maker "Version" "$VERSION" blue > coverage/version.svg
-        working-directory: thirdweb # Ensure tests run in thirdweb/
-
+      - name: Deploy badge to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        working-directory: thirdweb
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./coverage # Adjust to thirdweb/coverage/
+  
       - name: Build the library
         run: npm run build
         working-directory: thirdweb
 
       - name: Publish to NPM
         uses: JS-DevTools/npm-publish@v3
+        working-directory: thirdweb
         with:
           token: ${{ secrets.NPM_TOKEN }}
-          package: thirdweb/package.json
-
-      - name: Deploy badge to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./thirdweb/coverage # Adjust to thirdweb/coverage/
+          package: package.json
