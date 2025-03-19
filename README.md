@@ -1,6 +1,6 @@
 ![Dappify](./site/public/assets/dappify-banner.png)
 
-[![Thirdweb Widgets Library Coverage](https://dappify-web3.github.io/dappify/badges.svg)](https://github.com/dappify-web3/dappify/actions)
+[![Thirdweb Widgets Library Coverage](https://dappify-web3.github.io/dappify/badges.svg)](https://dappify-web3.github.io/widgets/badges.svg)
 [![Thirdweb Widgets Library Version](https://dappify-web3.github.io/widgets/version.svg)](https://www.npmjs.com/package/@dappify/thirdweb)
 
 Welcome to **[Dappify](https://github.com)**, a library for seamlessly integrating Web3 functionality into any webpage. Powered by Thirdweb, Dappify provides drop-in widgets like ConnectButton and ClaimButton to connect wallets, claim NFTs, and more—all with minimal setup and maximum flexibility and without having to write code.
