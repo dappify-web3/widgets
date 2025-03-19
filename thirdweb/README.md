@@ -1,6 +1,6 @@
 ## Thirdweb Widgets
 [![Thirdweb Widgets Library Coverage](https://github.com/dappify-web3/widgets/actions/workflows/publish_thirdweb_widgets_library.yml/badge.svg)](https://github.com/dappify-web3/widgets/actions/workflows/publish_thirdweb_widgets_library.yml/badge.svg)
-[![Thirdweb Widgets Library Version](https://dappify-web3.github.io/widgets/version.svg)](https://www.npmjs.com/package/@dappify/thirdweb)
+[![Thirdweb Widgets Library Version](https://img.shields.io/npm/v/@dappify/thirdweb.svg)](https://www.npmjs.com/package/@dappify/thirdweb)
 
 These are [Thirdweb](https://thirdweb.com) UI components that are encapsulated and exposed as html components that can be embedded into any website without coding.Context and Provider management is also supported, allowing these components to talk between each other.
 
