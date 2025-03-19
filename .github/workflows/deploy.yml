@@ -3,8 +3,6 @@ name: Publish library to NPM
 on:
   push:
     branches: [ main ]
-    paths:
-      - 'thirdweb/**'
   workflow_dispatch:
 
 permissions:
@@ -25,30 +23,27 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: thirdweb
   
       - name: Run tests with coverage
         run: npm run test
-        working-directory: thirdweb # Ensure tests run in thirdweb/
 
       - name: Generate coverage badge
         uses: jaywcjlove/coverage-badges-cli@main
         with:
-          source: thirdweb/coverage/coverage-summary.json # Adjust path to thirdweb/
-          output: thirdweb/coverage/badges.svg # Keep badge in thirdweb/coverage/
+          source: coverage/coverage-summary.json # Adjust path to thirdweb/
+          output: coverage/badges.svg # Keep badge in thirdweb/coverage/
 
       - name: Deploy badge to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./thirdweb/coverage # Adjust to thirdweb/coverage/
+          publish_dir: ./coverage # Adjust to thirdweb/coverage/
   
       - name: Build the library
         run: npm run build
-        working-directory: thirdweb
 
       - name: Publish to NPM
         uses: JS-DevTools/npm-publish@v3
         with:
           token: ${{ secrets.NPM_TOKEN }}
-          package: thirdweb/package.json
+          package: package.json

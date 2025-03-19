@@ -2,7 +2,7 @@
 . "$(dirname "$0")/_/husky.sh"
 
 # Run tests with coverage
-npm run test:cov -- --silent
+npm run test -- --silent
 
 # Extract total coverage percentage (statements) from coverage-summary.json
 COVERAGE=$(node -e "const cov = require('./coverage/coverage-summary.json'); console.log(cov.total.statements.pct);")
