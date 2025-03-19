@@ -4,8 +4,8 @@ on:
   push:
     branches: [ main ]
     paths:
-      - 'thirdweb/**' # Trigger only when thirdweb changes
-  workflow_dispatch: # Allow manual triggering from GitHub UI
+      - 'thirdweb/**'
+  workflow_dispatch:
 
 jobs:
   publish:
@@ -18,31 +18,34 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "20"
-          registry-url: "https://registry.npmjs.org" # Ensures NPM is the target registry
+          registry-url: "https://registry.npmjs.org"
 
       - name: Install dependencies
-        run: npm install # Shortened to npm i in your original, both work
-        working-directory: thirdweb # Navigate to the thirdweb folder
+        run: npm install
+        working-directory: thirdweb
 
       - name: Run tests with coverage
         run: npm run test:cov
+        working-directory: thirdweb # Ensure tests run in thirdweb/
+
       - name: Generate coverage badge
         uses: jaywcjlove/coverage-badges-cli@main
         with:
-          source: coverage/coverage-summary.json
-          output: coverage/badges.svg
+          source: thirdweb/coverage/coverage-summary.json # Adjust path to thirdweb/
+          output: thirdweb/coverage/badges.svg # Keep badge in thirdweb/coverage/
+
       - name: Deploy badge to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./coverage
+          publish_dir: ./thirdweb/coverage # Adjust to thirdweb/coverage/
 
       - name: Build the library
         run: npm run build
-        working-directory: thirdweb # Navigate to the thirdweb folder
+        working-directory: thirdweb
 
       - name: Publish to NPM
         uses: JS-DevTools/npm-publish@v3
         with:
-          token: ${{ secrets.NPM_TOKEN }} # Ensure this secret is set in GitHub repo settings
-          package: thirdweb/package.json # Specify the package.json location
+          token: ${{ secrets.NPM_TOKEN }}
+          package: thirdweb/package.json
