@@ -31,19 +31,9 @@ jobs:
         run: npm run test
         working-directory: thirdweb # Ensure tests run in thirdweb/
 
-      - name: Generate coverage badge
-        uses: jaywcjlove/coverage-badges-cli@main
+      - name: Generating coverage badges
+        uses: jpb06/jest-badges-action@latest
         working-directory: thirdweb
-        with:
-          source: coverage/coverage-summary.json # Adjust path to thirdweb/
-          output: coverage/badges.svg # Keep badge in thirdweb/coverage/
-
-      - name: Deploy badge to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        working-directory: thirdweb
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./coverage # Adjust to thirdweb/coverage/
   
       - name: Build the library
         run: npm run build
