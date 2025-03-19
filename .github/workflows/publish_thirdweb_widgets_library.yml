@@ -25,7 +25,7 @@ jobs:
         working-directory: thirdweb
 
       - name: Run tests with coverage
-        run: npm run test:cov
+        run: npm run test
         working-directory: thirdweb # Ensure tests run in thirdweb/
 
       - name: Generate coverage badge
