@@ -4,11 +4,11 @@ on:
   push:
     branches: [ main ]
     paths:
-      - '**'  # Trigger on any changes, since files are at root
+      - 'thirdweb/**'
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: write  # Allow writing to repository contents (e.g., pushing to gh-pages)
 
 jobs:
   publish:
@@ -24,36 +24,41 @@ jobs:
           registry-url: "https://registry.npmjs.org"
 
       - name: Install dependencies
-        run: npm install  # Runs at root
+        run: npm install
+        working-directory: thirdweb
 
       - name: Debug directory structure
-        run: pwd && ls -la  # List root directory contents
-
+        run: pwd && ls -la && ls -la thirdweb/
+        working-directory: thirdweb
+  
       - name: Run tests with coverage
-        run: npm run test  # Runs at root
+        run: npm run test
+        working-directory: thirdweb # Ensure tests run in thirdweb/
 
       - name: Generate coverage badge
         uses: jaywcjlove/coverage-badges-cli@main
         with:
-          source: coverage/coverage-summary.json  # Path from root
-          output: coverage/badges.svg
+          source: thirdweb/coverage/coverage-summary.json # Adjust path to thirdweb/
+          output: thirdweb/coverage/badges.svg # Keep badge in thirdweb/coverage/
 
       - name: Extract version and generate version badge
         run: |
           VERSION=$(node -p "require('./package.json').version")
           npx badge-maker "Version" "$VERSION" blue > coverage/version.svg
+        working-directory: thirdweb # Ensure tests run in thirdweb/
 
       - name: Build the library
-        run: npm run build  # Runs at root
+        run: npm run build
+        working-directory: thirdweb
 
       - name: Publish to NPM
         uses: JS-DevTools/npm-publish@v3
         with:
           token: ${{ secrets.NPM_TOKEN }}
-          package: package.json  # Path from root
+          package: thirdweb/package.json
 
-      - name: Deploy badges to GitHub Pages
+      - name: Deploy badge to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./coverage  # Path from root
+          publish_dir: ./thirdweb/coverage # Adjust to thirdweb/coverage/
