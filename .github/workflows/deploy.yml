@@ -1,4 +1,4 @@
-name: Widgets Library
+name: dappify-widgets-library-publish
 
 on:
   push:
