@@ -1,7 +1,10 @@
 {
   "name": "@dappify/thirdweb",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "type": "module",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build src/widgets.js --no-scope-hoist --no-optimize --no-source-maps --dist-dir dist --public-url ./ --no-content-hash",
