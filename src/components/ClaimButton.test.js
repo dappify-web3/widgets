@@ -52,7 +52,8 @@ describe('getProps', () => {
         claimParams: {
             quantity: 1n,
             type: 'ERC20'
-        }
+        },
+        children: "Claim"
       });
       expect(createThirdwebClient).toHaveBeenCalledWith({ clientId: 'test-client-id' });
       expect(availableChains.defineChain).toHaveBeenCalledTimes(3);

@@ -27,7 +27,7 @@ export const getProps = (element) => {
       quantity: BigInt(quantity || 1),
       // tokenId: tokenId ? BigInt(tokenId) : undefined,
     },
-    children: label,
+    children: label || "Claim"
   };
 };
 
