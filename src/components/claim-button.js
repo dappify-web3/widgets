@@ -3,20 +3,9 @@ import { createThirdwebClient } from "thirdweb";
 import { ClaimButton as ThirdwebComponent } from "thirdweb/react";
 
 export const getProps = (element) => {
-  const {
-    // Mandatory
-    clientId,
-    chains,
-    contractAddress,
-    type, // ERC1155, ERC20, ERC721...
-    // Optional
-    theme,
-    quantity, 
-    tokenId,
-    label
-  } = element.dataset;
+  const { clientId, chains, contractAddress, type, theme, quantity, tokenId, label } = element.dataset;
   const enabledChains = chains?.split(",").map((id) => availableChains.defineChain({ id: parseInt(id) })).filter(Boolean);
-  return {
+  const props = {
     client: createThirdwebClient({ clientId }),
     theme: theme || "light",
     chains: enabledChains,
@@ -24,11 +13,12 @@ export const getProps = (element) => {
     contractAddress,
     claimParams: {
       type,
-      quantity: BigInt(quantity || 1),
-      // tokenId: tokenId ? BigInt(tokenId) : undefined,
+      quantity: type === "ERC20" ? quantity : BigInt(quantity || 1),
+      ...(tokenId !== undefined && { tokenId: BigInt(tokenId) })
     },
     children: label || "Claim"
   };
+  return props;
 };
 
 export const getComponent = () => ThirdwebComponent;

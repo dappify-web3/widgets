@@ -1,5 +1,5 @@
 // // module.test.js
-import * as component from "./ClaimButton.js"; // Adjust the path to your module file
+import * as component from "./claim-button.js"; // Adjust the path to your module file
 import * as availableChains from 'thirdweb/chains';
 import { createThirdwebClient } from 'thirdweb';
 import { ClaimButton as Component } from 'thirdweb/react';
@@ -50,7 +50,6 @@ describe('getProps', () => {
         chain: { id: 1 },
         contractAddress: '0x',
         claimParams: {
-            quantity: 1n,
             type: 'ERC20'
         },
         children: "Claim"
@@ -67,8 +66,9 @@ describe('getProps', () => {
             theme: 'dark',
             label: 'test',
             contractAddress: '0x',
-            quantity: 1n,
-            type: 'ERC20'
+            quantity: "1",
+            type: 'ERC20',
+            tokenId: '101'
           },
         };
     
@@ -83,11 +83,71 @@ describe('getProps', () => {
           children: 'test',
           contractAddress: '0x',
           claimParams: {
-                quantity: 1n,
-                type: 'ERC20'
+                quantity: "1",
+                type: 'ERC20',
+                tokenId: 101n
             }
         });
         expect(createThirdwebClient).toHaveBeenCalledWith({ clientId: 'test-client-id' });
         expect(availableChains.defineChain).toHaveBeenCalledTimes(6);
     });
+
+    test('returns correct props for ERC20', () => {
+      const element = {
+        dataset: {
+          clientId: 'test-client-id',
+          chains: '1',
+          contractAddress: '0x',
+          quantity: "1",
+          type: 'ERC20'
+        },
+      };
+  
+      const result = component.getProps(element);
+  
+      expect(result).toEqual({
+        client: { clientId: 'test-client-id' },
+        chains: [{ id: 1 }],
+        chain: { id: 1 },
+        theme: 'light',
+        contractAddress: '0x',
+        claimParams: {
+              quantity: "1",
+              type: 'ERC20'
+          },
+          children: "Claim"
+      });
+      expect(createThirdwebClient).toHaveBeenCalledWith({ clientId: 'test-client-id' });
+      expect(availableChains.defineChain).toHaveBeenCalledTimes(7);
+  });
+
+    test('returns correct props for ERC1155', () => {
+      const element = {
+        dataset: {
+          clientId: 'test-client-id',
+          chains: '1',
+          contractAddress: '0x',
+          type: 'ERC1155',
+          tokenId: '0'
+        },
+      };
+
+      const result = component.getProps(element);
+
+      expect(result).toEqual({
+        client: { clientId: 'test-client-id' },
+        chains: [{ id: 1 }],
+        chain: { id: 1 },
+        theme: 'light',
+        contractAddress: '0x',
+        claimParams: {
+              quantity: 1n,
+              type: 'ERC1155',
+              tokenId: 0n
+          },
+          children: "Claim"
+      });
+      expect(createThirdwebClient).toHaveBeenCalledWith({ clientId: 'test-client-id' });
+      expect(availableChains.defineChain).toHaveBeenCalledTimes(8);
+  });
 });

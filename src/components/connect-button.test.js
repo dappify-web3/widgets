@@ -1,5 +1,5 @@
 // // module.test.js
-import * as component from "./ConnectButton.js"; // Adjust the path to your module file
+import * as component from "./connect-button.js"; // Adjust the path to your module file
 import * as availableChains from 'thirdweb/chains';
 import { createThirdwebClient } from 'thirdweb';
 import { ConnectButton as Component } from 'thirdweb/react';

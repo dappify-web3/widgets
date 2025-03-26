@@ -21,18 +21,98 @@
       </div>
     </div>
     <div class="text-center">
-      <h2 class="text-xl font-semibold mb-4">Claim NFT</h2>
-      <div id="claim-button-demo" 
+      <h2 class="text-xl font-semibold mb-4">Claim ERC721</h2>
+      <div id="claim-erc721-demo" 
            data-widget="ClaimButton"
            data-client-id="e9bae73377d43e42aea12c0d07474163"
            data-chains="43113"
            data-theme="dark"
-           data-label="🔥Mint NFT!"
+           data-label="Mint ERC721"
            data-contract-address="0xeF155b056299Ba3e98987f37a2CB5518DE0a98F3"
-           data-type="ERC721"
-           data-quantity=1>
+           data-type="ERC721">
       </div>
     </div>
+  <div class="text-center">
+    <h2 class="text-xl font-semibold mb-4">Claim ERC1155</h2>
+    <div id="claim-erc1155-demo" 
+         data-widget="ClaimButton"
+         data-client-id="e9bae73377d43e42aea12c0d07474163"
+         data-chains="43113"
+         data-theme="dark"
+         data-label="Mint ERC1155"
+         data-contract-address="0xb5227A853421F78166211300CCC07FdB740725a8"
+         data-type="ERC1155"
+         data-token-id="0">
+    </div>
+  </div>
+    <!-- <div class="text-center">
+      <h2 class="text-xl font-semibold mb-4">Claim ERC20</h2>
+      <div id="claim-erc20-demo" 
+           data-widget="ClaimButton"
+           data-client-id="e9bae73377d43e42aea12c0d07474163"
+           data-chains="43113"
+           data-theme="dark"
+           data-label="Mint ERC20"
+           data-contract-address="0x21A91F2888fD0a1f2ca653eeD2aa61Dc6910d79E">
+      </div>
+    </div> -->
+
+    <div class="text-center">
+      <h2 class="text-xl font-semibold mb-4">Token Gating ERC1155</h2>
+      <div id="token-gating1155-demo" 
+           data-widget="TokenGating"
+           data-client-id="e9bae73377d43e42aea12c0d07474163"
+           data-chain="43113"
+           data-gate-id="gated-content-1155"
+           data-contract-address="0xb5227A853421F78166211300CCC07FdB740725a8"
+           data-quantity="2"
+           data-token-id="0"
+           data-type="ERC1155">
+      </div>
+      <!-- Gated content -->
+      <div id="gated-content-1155" class="token-gated bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        <strong class="font-bold">ERC1155 Success!</strong>
+        <span class="block sm:inline">Only available for token gated users.</span>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <h2 class="text-xl font-semibold mb-4">Token Gating ERC721</h2>
+      <div id="token-gating721-demo" 
+           data-widget="TokenGating"
+           data-client-id="e9bae73377d43e42aea12c0d07474163"
+           data-chain="43113"
+           data-gate-id="gated-content-721"
+           data-contract-address="0xeF155b056299Ba3e98987f37a2CB5518DE0a98F3"
+           data-quantity="4"
+           data-type="ERC721">
+      </div>
+      <!-- Gated content -->
+      <div id="gated-content-721" class="token-gated bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        <strong class="font-bold">ERC721 Success!</strong>
+        <span class="block sm:inline">Only available for token gated users.</span>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <h2 class="text-xl font-semibold mb-4">Token Gating ERC20</h2>
+      <div id="token-gating20-demo" 
+           data-widget="TokenGating"
+           data-client-id="e9bae73377d43e42aea12c0d07474163"
+           data-chain="43113"
+           data-gate-id="gated-content-20"
+           data-contract-address="0x21A91F2888fD0a1f2ca653eeD2aa61Dc6910d79E"
+           data-quantity="10000"
+           data-type="ERC20">
+      </div>
+      <!-- Gated content -->
+      <div id="gated-content-20" class="token-gated bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        <strong class="font-bold">ERC20 Success!</strong>
+        <span class="block sm:inline">Only available for token gated users.</span>
+      </div>
+    </div>
+
+
   </div>
   <!-- For local testing before bundling -->
   <script type="module" src="./src/widgets.js"></script>
