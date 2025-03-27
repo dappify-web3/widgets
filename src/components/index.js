@@ -1,5 +1,5 @@
-import { getProps as getPropsConnectButton, getComponent as getConnectButtonComponent } from "./ConnectButton.js";
-import { getProps as getPropsClaimButton, getComponent as getClaimButtonComponent } from "./ClaimButton.js";
+import { getProps as getPropsConnectButton, getComponent as getConnectButtonComponent } from "./connect-button.js";
+import { getProps as getPropsClaimButton, getComponent as getClaimButtonComponent } from "./claim-button.js";
 
 // Call getComponent() to get the actual component functions
 const ConnectButton = getConnectButtonComponent();

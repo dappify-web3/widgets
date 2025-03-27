@@ -1,15 +1,15 @@
 // components.test.js
-import * as ConnectButtonModule from './ConnectButton.js';
-import * as ClaimButtonModule from './ClaimButton.js';
+import * as ConnectButtonModule from './connect-button.js';
+import * as ClaimButtonModule from './claim-button.js';
 import { components } from './index.js';
 
 // src/components/index.test.js
-jest.mock('./ConnectButton.js', () => ({
+jest.mock('./connect-button.js', () => ({
     getProps: jest.fn(() => ({ prop1: 'value1' })),
     getComponent: jest.fn(() => jest.fn(() => 'ConnectButtonComponent'))
   }));
   
-  jest.mock('./ClaimButton.js', () => ({
+  jest.mock('./claim-button.js', () => ({
     getProps: jest.fn(() => ({ prop2: 'value2' })),
     getComponent: jest.fn(() => jest.fn(() => 'ClaimButtonComponent'))
   }));
@@ -22,8 +22,8 @@ jest.mock('./ConnectButton.js', () => ({
       jest.clearAllMocks(); // Clear mock call counts
       
       // Import modules fresh after mocks are set
-      ConnectButtonModule = require('./ConnectButton.js');
-      ClaimButtonModule = require('./ClaimButton.js');
+      ConnectButtonModule = require('./connect-button.js');
+      ClaimButtonModule = require('./claim-button.js');
       ({ components } = require('./index.js'));
     });
   

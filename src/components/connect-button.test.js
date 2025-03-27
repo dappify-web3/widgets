@@ -1,8 +1,8 @@
 // // module.test.js
-import * as component from "./ClaimButton.js"; // Adjust the path to your module file
+import * as component from "./connect-button.js"; // Adjust the path to your module file
 import * as availableChains from 'thirdweb/chains';
 import { createThirdwebClient } from 'thirdweb';
-import { ClaimButton as Component } from 'thirdweb/react';
+import { ConnectButton as Component } from 'thirdweb/react';
 
 // Mock the external dependencies
 jest.mock('thirdweb/chains', () => ({
@@ -35,9 +35,7 @@ describe('getProps', () => {
       const element = {
         dataset: {
           clientId: 'test-client-id',
-          chains: '1,2,3',
-          contractAddress: '0x',
-          type: 'ERC20'
+          chains: '1,2,3'
         },
       };
   
@@ -47,12 +45,7 @@ describe('getProps', () => {
         client: { clientId: 'test-client-id' },
         theme: 'light',
         chains: [{ id: 1 }, { id: 2 }, { id: 3 }],
-        chain: { id: 1 },
-        contractAddress: '0x',
-        claimParams: {
-            quantity: 1n,
-            type: 'ERC20'
-        }
+        chain: { id: 1 }
       });
       expect(createThirdwebClient).toHaveBeenCalledWith({ clientId: 'test-client-id' });
       expect(availableChains.defineChain).toHaveBeenCalledTimes(3);
@@ -63,11 +56,7 @@ describe('getProps', () => {
           dataset: {
             clientId: 'test-client-id',
             chains: '1,2,3',
-            theme: 'dark',
-            label: 'test',
-            contractAddress: '0x',
-            quantity: 1n,
-            type: 'ERC20'
+            locale: 'jp_JP'
           },
         };
     
@@ -78,13 +67,7 @@ describe('getProps', () => {
           theme: 'light',
           chains: [{ id: 1 }, { id: 2 }, { id: 3 }],
           chain: { id: 1 },
-          theme: 'dark',
-          children: 'test',
-          contractAddress: '0x',
-          claimParams: {
-                quantity: 1n,
-                type: 'ERC20'
-            }
+          locale: 'jp_JP'
         });
         expect(createThirdwebClient).toHaveBeenCalledWith({ clientId: 'test-client-id' });
         expect(availableChains.defineChain).toHaveBeenCalledTimes(6);
