@@ -1,6 +1,6 @@
 {
   "name": "@dappify/thirdweb",
-  "version": "0.1.27",
+  "version": "0.1.29",
   "type": "module",
   "files": [
     "dist"
@@ -21,6 +21,7 @@
     "@babel/core": "^7.26.10",
     "@babel/preset-env": "^7.26.9",
     "@babel/preset-react": "^7.26.3",
+    "@testing-library/react": "^16.2.0",
     "babel-jest": "^29.7.0",
     "buffer": "^6.0.3",
     "husky": "^9.1.7",
