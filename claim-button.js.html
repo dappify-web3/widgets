@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/token-gating.js</title>
+    <title>Code coverage report for claim-button.js</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../prettify.css" />
-    <link rel="stylesheet" href="../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
+    <link rel="stylesheet" href="prettify.css" />
+    <link rel="stylesheet" href="base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../sort-arrow-sprite.png);
+            background-image: url(sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">components</a> token-gating.js</h1>
+        <h1><a href="index.html">All files</a> claim-button.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>23/23</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>22/22</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
@@ -96,107 +96,89 @@
 <a name='L31'></a><a href='#L31'>31</a>
 <a name='L32'></a><a href='#L32'>32</a>
 <a name='L33'></a><a href='#L33'>33</a>
-<a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a>
-<a name='L36'></a><a href='#L36'>36</a>
-<a name='L37'></a><a href='#L37'>37</a>
-<a name='L38'></a><a href='#L38'>38</a>
-<a name='L39'></a><a href='#L39'>39</a>
-<a name='L40'></a><a href='#L40'>40</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L34'></a><a href='#L34'>34</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import { useEffect, useState } from "react";
-import * as availableChains from "thirdweb/chains";
-import { createThirdwebClient, getContract  } from "thirdweb";
-import { useActiveAccount } from "thirdweb/react";
-import { obfuscate, reveal, fetchBalances } from "../utils/tokens";
-&nbsp;
-&nbsp;
-export const Component = ({ gateId, quantity=1, contract, type, tokenId }) =&gt; {
-    const [balance, setBalance] = useState(1)
-    const [obfuscated, setObfuscated] = useState(null);
-    const account = useActiveAccount();
-    const address = account ? account.address : undefined;
-&nbsp;
-    useEffect(() =&gt; {
-      obfuscate(gateId, obfuscated, setObfuscated);
-      reveal(gateId, obfuscated, balance, quantity);
-    }, [balance, gateId, obfuscated]);
-&nbsp;
-    useEffect(() =&gt; {
-      if (!address) {
-        // Explicitly use the falsy branch
-        console.log("No address, skipping fetchBalances.");
-        return;
-      }
-      fetchBalances(type, address, contract, tokenId, setBalance);
-    }, [account])
-  
-    return null;
-}
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import * as availableChains from "thirdweb/chains";
+import { createThirdwebClient } from "thirdweb";
+import { ClaimButton as ThirdwebComponent } from "thirdweb/react";
 &nbsp;
 export const getProps = (element) =&gt; {
-  const { clientId, chain, gateId, contractAddress, quantity, type, tokenId } = element.dataset;
-  const client = createThirdwebClient({ clientId });
-  const selectedChain = availableChains.defineChain({ id: parseInt(chain) });
-  const contract = getContract({ client, chain: selectedChain, address: contractAddress, });
-  const props = { client, chain: selectedChain, gateId, contractAddress, quantity, type, contract, tokenId }; 
-  return props;
+  const {
+    // Mandatory
+    clientId,
+    chains,
+    contractAddress,
+    type, // ERC1155, ERC20, ERC721...
+    // Optional
+    theme,
+    quantity, 
+    tokenId,
+    label
+  } = element.dataset;
+  const enabledChains = chains?.split(",").map((id) =&gt; availableChains.defineChain({ id: parseInt(id) })).filter(Boolean);
+  return {
+    client: createThirdwebClient({ clientId }),
+    theme: theme || "light",
+    chains: enabledChains,
+    chain: enabledChains[0],
+    contractAddress,
+    claimParams: {
+      type,
+      quantity: BigInt(quantity || 1),
+      // tokenId: tokenId ? BigInt(tokenId) : undefined,
+    },
+    children: label,
+  };
 };
 &nbsp;
-export const getComponent = () =&gt; Component;</pre></td></tr></table></pre>
+export const getComponent = () =&gt; ThirdwebComponent;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-27T09:02:40.807Z
+                at 2025-03-27T10:18:50.543Z
             </div>
-        <script src="../prettify.js"></script>
+        <script src="prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../sorter.js"></script>
-        <script src="../block-navigation.js"></script>
+        <script src="sorter.js"></script>
+        <script src="block-navigation.js"></script>
     </body>
 </html>
     
