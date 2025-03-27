@@ -1,4 +1,4 @@
-import * as availableChains from "thirdweb/chains";
+import { defineChain } from "thirdweb/chains";
 import { createThirdwebClient } from "thirdweb";
 import { ConnectButton as ThirdwebComponent } from "thirdweb/react";
 
@@ -11,7 +11,7 @@ export const getProps = (element) => {
     theme,
     locale
   } = element.dataset;
-  const enabledChains = chains?.split(",").map((id) => availableChains.defineChain({ id: parseInt(id) })).filter(Boolean);
+  const enabledChains = chains?.split(",").map((id) => defineChain({ id: parseInt(id) })).filter(Boolean);
   return {
     client: createThirdwebClient({ clientId }),
     theme: theme || "light",

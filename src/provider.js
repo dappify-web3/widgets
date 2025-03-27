@@ -1,8 +1,7 @@
 import React, { Suspense, useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { ThirdwebProvider } from "thirdweb/react";
-import * as availableChains from "thirdweb/chains";
-import { createThirdwebClient } from "thirdweb";
+import { defineChain } from "thirdweb/chains";
 import { getRegisteredWidgets } from "./registry.js";
 
 const AsyncPropsWrapper = ({ element, Component }) => {
@@ -61,9 +60,9 @@ export const renderProvider = (root, widgetElements) => {
 
   const enabledChains = chains
     ?.split(",")
-    .map((id) => availableChains.defineChain({ id: parseInt(id) }))
+    .map((id) => defineChain({ id: parseInt(id) }))
     .filter(Boolean);
-  const defaultChain = enabledChains?.[0] || availableChains.Mainnet;
+  const defaultChain = enabledChains?.[0];
 
   root.render(
     <ThirdwebProvider

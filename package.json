@@ -1,15 +1,30 @@
 {
   "name": "@dappify/thirdweb",
-  "version": "0.1.13",
+  "version": "0.1.16",
   "type": "module",
   "files": [
     "dist"
   ],
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build src/widgets.js --no-scope-hoist --no-optimize --no-source-maps --dist-dir dist --public-url ./ --no-content-hash",
+    "build": "parcel build src/widgets.js --target widget --dist-dir dist --public-url ./ --no-content-hash",
     "test": "jest --coverage",
     "prepare": "husky"
+  },
+  "targets": {
+    "widget": {
+      "context": "browser",
+      "outputFormat": "global",
+      "isLibrary": true,
+      "includeNodeModules": true
+    }
+  },
+  "alias": {
+    "events": "events",
+    "buffer": "buffer",
+    "process": "process/browser",
+    "crypto": "crypto-browserify",
+    "stream": "stream-browserify"
   },
   "dependencies": {
     "next": "15.2.2",
@@ -21,15 +36,22 @@
     "@babel/core": "^7.26.10",
     "@babel/preset-env": "^7.26.9",
     "@babel/preset-react": "^7.26.3",
+    "@parcel/compressor-brotli": "^2.14.2",
+    "@parcel/compressor-gzip": "^2.14.2",
+    "@parcel/reporter-bundle-analyzer": "^2.14.2",
     "@testing-library/react": "^16.2.0",
     "babel-jest": "^29.7.0",
     "buffer": "^6.0.3",
+    "crypto-browserify": "^3.12.1",
+    "events": "^3.3.0",
     "husky": "^9.1.7",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "jsdom": "^26.0.0",
-    "parcel": "^2.12.0",
-    "process": "^0.11.10"
+    "parcel": "^2.14.2",
+    "process": "^0.11.10",
+    "source-map-explorer": "^2.5.3",
+    "stream-browserify": "^3.0.0"
   },
   "jest": {
     "testEnvironment": "jsdom",
@@ -72,7 +94,5 @@
   "@parcel/resolver-default": {
     "packageExports": true
   },
-  "browserslist": [
-    "defaults"
-  ]
+  "browserslist": "> 0.5%, last 2 versions, not dead"
 }

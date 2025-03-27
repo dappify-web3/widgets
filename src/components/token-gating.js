@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import * as availableChains from "thirdweb/chains";
+import { defineChain } from "thirdweb/chains";
 import { createThirdwebClient, getContract  } from "thirdweb";
 import { useActiveAccount } from "thirdweb/react";
 import { obfuscate, reveal, fetchBalances } from "../utils/tokens";
@@ -31,7 +31,7 @@ export const Component = ({ gateId, quantity=1, contract, type, tokenId }) => {
 export const getProps = (element) => {
   const { clientId, chain, gateId, contractAddress, quantity, type, tokenId } = element.dataset;
   const client = createThirdwebClient({ clientId });
-  const selectedChain = availableChains.defineChain({ id: parseInt(chain) });
+  const selectedChain = defineChain({ id: parseInt(chain) });
   const contract = getContract({ client, chain: selectedChain, address: contractAddress, });
   const props = { client, chain: selectedChain, gateId, contractAddress, quantity, type, contract, tokenId }; 
   return props;

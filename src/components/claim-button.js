@@ -1,10 +1,10 @@
-import * as availableChains from "thirdweb/chains";
+import { defineChain } from "thirdweb/chains";
 import { createThirdwebClient } from "thirdweb";
 import { ClaimButton as ThirdwebComponent } from "thirdweb/react";
 
 export const getProps = (element) => {
   const { clientId, chains, contractAddress, type, theme, quantity, tokenId, label } = element.dataset;
-  const enabledChains = chains?.split(",").map((id) => availableChains.defineChain({ id: parseInt(id) })).filter(Boolean);
+  const enabledChains = chains?.split(",").map((id) => defineChain({ id: parseInt(id) })).filter(Boolean);
   const props = {
     client: createThirdwebClient({ clientId }),
     theme: theme || "light",
