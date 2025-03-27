@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/7</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
@@ -86,36 +86,14 @@
 <a name='L21'></a><a href='#L21'>21</a>
 <a name='L22'></a><a href='#L22'>22</a>
 <a name='L23'></a><a href='#L23'>23</a>
-<a name='L24'></a><a href='#L24'>24</a>
-<a name='L25'></a><a href='#L25'>25</a>
-<a name='L26'></a><a href='#L26'>26</a>
-<a name='L27'></a><a href='#L27'>27</a>
-<a name='L28'></a><a href='#L28'>28</a>
-<a name='L29'></a><a href='#L29'>29</a>
-<a name='L30'></a><a href='#L30'>30</a>
-<a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a>
-<a name='L33'></a><a href='#L33'>33</a>
-<a name='L34'></a><a href='#L34'>34</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L24'></a><a href='#L24'>24</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -128,26 +106,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import * as availableChains from "thirdweb/chains";
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import { defineChain } from "thirdweb/chains";
 import { createThirdwebClient } from "thirdweb";
 import { ClaimButton as ThirdwebComponent } from "thirdweb/react";
 &nbsp;
 export const getProps = (element) =&gt; {
-  const {
-    // Mandatory
-    clientId,
-    chains,
-    contractAddress,
-    type, // ERC1155, ERC20, ERC721...
-    // Optional
-    theme,
-    quantity, 
-    tokenId,
-    label
-  } = element.dataset;
-  const enabledChains = chains?.split(",").map((id) =&gt; availableChains.defineChain({ id: parseInt(id) })).filter(Boolean);
-  return {
+  const { clientId, chains, contractAddress, type, theme, quantity, tokenId, label } = element.dataset;
+  const enabledChains = chains?.split(",").map((id) =&gt; defineChain({ id: parseInt(id) })).filter(Boolean);
+  const props = {
     client: createThirdwebClient({ clientId }),
     theme: theme || "light",
     chains: enabledChains,
@@ -155,11 +124,12 @@ export const getProps = (element) =&gt; {
     contractAddress,
     claimParams: {
       type,
-      quantity: BigInt(quantity || 1),
-      // tokenId: tokenId ? BigInt(tokenId) : undefined,
+      quantity: type === "ERC20" ? quantity : BigInt(quantity || 1),
+      ...(tokenId !== undefined &amp;&amp; { tokenId: BigInt(tokenId) })
     },
-    children: label,
+    children: label || "Claim"
   };
+  return props;
 };
 &nbsp;
 export const getComponent = () =&gt; ThirdwebComponent;</pre></td></tr></table></pre>
@@ -169,7 +139,7 @@ export const getComponent = () =&gt; ThirdwebComponent;</pre></td></tr></table><
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-27T10:18:50.543Z
+                at 2025-03-27T10:28:59.549Z
             </div>
         <script src="prettify.js"></script>
         <script>
