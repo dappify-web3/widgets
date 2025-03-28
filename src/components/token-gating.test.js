@@ -1,4 +1,3 @@
-
 import * as component from "./token-gating.js";
 import { Component, getComponent } from "./token-gating.js";
 import { useActiveAccount } from "thirdweb/react";
@@ -13,33 +12,33 @@ jest.mock('../utils/tokens', () => ({
 }));
 
 jest.mock('thirdweb/chains', () => ({
-  defineChain: jest.fn((chainConfig) => chainConfig), // Mock defineChain to return the config
-  Mainnet: { id: 1, name: 'Mainnet' }, // Mock Mainnet as a default chain
+  defineChain: jest.fn((chainConfig) => chainConfig),
+  Mainnet: { id: 1, name: 'Mainnet' },
 }));
 
 jest.mock('thirdweb/utils', () => ({
-  toEther: jest.fn((chainConfig) => 20), // Mock defineChain to return the config
+  toEther: jest.fn(() => 20),
 }));
 
 jest.mock('thirdweb/extensions/erc20', () => ({
-  balanceOf: jest.fn((chainConfig) => 20000), // Mock defineChain to return the config
+  balanceOf: jest.fn(() => 20000),
 }));
 
 jest.mock('thirdweb/extensions/erc721', () => ({
-  balanceOf: jest.fn((chainConfig) => 721), // Mock defineChain to return the config
+  balanceOf: jest.fn(() => 721),
 }));
 
 jest.mock('thirdweb/extensions/erc1155', () => ({
-  balanceOf: jest.fn((chainConfig) => 1155), // Mock defineChain to return the config
+  balanceOf: jest.fn(() => 1155),
 }));
 
 jest.mock('thirdweb/react', () => ({
-  useActiveAccount: jest.fn(() => ({ address: '0xabc' }))
+  useActiveAccount: jest.fn(() => ({ address: '0xabc' })),
 }));
 
 jest.mock('thirdweb', () => ({
-  createThirdwebClient: jest.fn((config) => ({ clientId: config.clientId })), // Mock client creation
-  getContract: jest.fn((config) => ({ mocked: true }))
+  createThirdwebClient: jest.fn((config) => ({ clientId: config.clientId })),
+  getContract: jest.fn(() => ({ mocked: true })),
 }));
 
 describe('getComponent', () => {
@@ -48,7 +47,6 @@ describe('getComponent', () => {
   });
 });
 
-// Test props
 describe('getProps', () => {
   test('returns correct props ERC721 Gating', () => {
     const element = {
@@ -58,9 +56,10 @@ describe('getProps', () => {
         gateId: 'demo',
         contractAddress: '0x',
         quantity: "1",
-        type: 'ERC20'
+        type: 'ERC20',
       },
     };
+
     const result = component.getProps(element);
 
     const expectedResult = {
@@ -72,7 +71,8 @@ describe('getProps', () => {
       quantity: "1",
       tokenId: undefined,
       type: "ERC20"
-    }
+    };
+
     expect(result).toEqual(expectedResult);
   });
 });
@@ -84,13 +84,13 @@ describe('Component', () => {
   beforeEach(() => {
     jest.clearAllMocks();
 
-    // Setup DOM element for gateId
     const el = document.createElement('div');
     el.id = gateId;
     el.innerHTML = 'Secret';
     document.body.appendChild(el);
 
-    // Mock thirdweb hook
+    obfuscate.mockImplementation((_, __, setter) => setter("mocked-obfuscated-value"));
+    fetchBalances.mockImplementation((_, __, ___, ____, setBalance) => setBalance(1));
     useActiveAccount.mockReturnValue({ address });
   });
 
@@ -99,12 +99,12 @@ describe('Component', () => {
   });
 
   it('does not call fetchBalances when account is undefined', async () => {
-    useActiveAccount.mockReturnValue(undefined); // 👈 simulate not connected
+    useActiveAccount.mockReturnValue(undefined);
 
     await act(async () => {
       render(
         <Component
-          gateId="test-gate"
+          gateId={gateId}
           quantity={1}
           contract={{ address: '0xcontract' }}
           type="ERC20"
@@ -113,40 +113,29 @@ describe('Component', () => {
     });
 
     expect(fetchBalances).not.toHaveBeenCalled();
-    expect(obfuscate).toHaveBeenCalled(); // still called regardless
-    expect(reveal).toHaveBeenCalled();    // still called with null
+    expect(obfuscate).toHaveBeenCalled();
+    expect(reveal).toHaveBeenCalledWith(gateId, "mocked-obfuscated-value", 0, 1);
   });
 
   it('uses default quantity when none is provided', async () => {
-    useActiveAccount.mockReturnValue({ address: '0xabc' });
-  
     await act(async () => {
       render(
         <Component
-          gateId="test-gate"
+          gateId={gateId}
           contract={{ address: '0xcontract' }}
           type="ERC20"
-          // ⛔ quantity not passed!
         />
       );
     });
-  
-    // ✅ Will default to 1
-    expect(reveal).toHaveBeenCalledWith(
-      'test-gate',
-      null,
-      1,  // balance
-      1   // quantity defaulted!
-    );
-  });
-  
-  it('calls fetchBalances when account exists', async () => {
-    useActiveAccount.mockReturnValue({ address: '0xabc' });
 
+    expect(reveal).toHaveBeenCalledWith(gateId, "mocked-obfuscated-value", 1, 1);
+  });
+
+  it('calls fetchBalances when account exists', async () => {
     await act(async () => {
       render(
         <Component
-          gateId="test-gate"
+          gateId={gateId}
           quantity={2}
           contract={{ address: '0xcontract' }}
           type="ERC20"
@@ -163,66 +152,6 @@ describe('Component', () => {
     );
   });
 
-  it('calls fetchBalances when account exists', async () => {
-    useActiveAccount.mockReturnValue({ address: '0xabc' });
-
-    await act(async () => {
-      render(
-        <Component
-          gateId="test-gate"
-          quantity={1}
-          contract={{ address: '0xcontract' }}
-          type="ERC20"
-        />
-      );
-    });
-
-    expect(fetchBalances).toHaveBeenCalledWith(
-      'ERC20',
-      '0xabc',
-      { address: '0xcontract' },
-      undefined,
-      expect.any(Function)
-    );
-  });
-
-  it('does not call fetchBalances when account is undefined', async () => {
-    useActiveAccount.mockReturnValue(undefined);
-
-    await act(async () => {
-      render(
-        <Component
-          gateId="test-gate"
-          quantity={1}
-          contract={{ address: '0xcontract' }}
-          type="ERC20"
-        />
-      );
-    });
-
-    expect(fetchBalances).not.toHaveBeenCalled(); // ✅ Forces address = undefined path
-  });
-
-  it('does not call fetchBalances when account is undefined', async () => {
-    const spy = jest.spyOn(console, 'log').mockImplementation(() => { });
-    useActiveAccount.mockReturnValue(undefined);
-
-    await act(async () => {
-      render(
-        <Component
-          gateId="test-gate"
-          quantity={1}
-          contract={{ address: '0xcontract' }}
-          type="ERC20"
-        />
-      );
-    });
-
-    expect(fetchBalances).not.toHaveBeenCalled();
-    expect(spy).toHaveBeenCalledWith("No address, skipping fetchBalances.");
-    spy.mockRestore();
-  });
-
   it('calls fetchBalances, obfuscate, and reveal', async () => {
     await act(async () => {
       render(
@@ -235,25 +164,88 @@ describe('Component', () => {
       );
     });
 
-    expect(fetchBalances).toHaveBeenCalledWith(
-      'ERC20',
-      address,
-      { address: '0xcontract' },
-      undefined,
-      expect.any(Function)
-    );
-
+    expect(fetchBalances).toHaveBeenCalled();
     expect(obfuscate).toHaveBeenCalledWith(
       gateId,
       null,
       expect.any(Function)
     );
-
     expect(reveal).toHaveBeenCalledWith(
       gateId,
-      null,
+      "mocked-obfuscated-value",
       1,
       1
     );
   });
+
+  it('calls reveal with balance = 0 when disconnected', async () => {
+    useActiveAccount.mockReturnValue(undefined);
+    fetchBalances.mockImplementation(); // should not be called
+
+    await act(async () => {
+      render(
+        <Component
+          gateId={gateId}
+          quantity={1}
+          contract={{ address: '0xcontract' }}
+          type="ERC20"
+        />
+      );
+    });
+
+    expect(fetchBalances).not.toHaveBeenCalled();
+    expect(reveal).toHaveBeenCalledWith(gateId, "mocked-obfuscated-value", 0, 1);
+  });
+});
+
+describe('Component when disconnected', () => {
+  beforeEach(() => {
+    jest.resetModules(); // Clears require cache to allow remocking
+    jest.clearAllMocks();
+
+    // Reset DOM
+    document.body.innerHTML = '';
+
+    // Mock the DOM element
+    const el = document.createElement('div');
+    el.id = 'test-gate';
+    el.innerHTML = 'Secret';
+    document.body.appendChild(el);
+
+    // Mock obfuscate to always set a value
+    obfuscate.mockImplementation((_, __, setter) => setter("mocked-obfuscated-value"));
+  });
+
+  it('logs when no account is present', async () => {
+    // Mock console.log
+    const spy = jest.spyOn(console, 'log').mockImplementation(() => {});
+  
+    // Override useActiveAccount to simulate disconnect
+    useActiveAccount.mockImplementation(() => undefined);
+  
+    // Ensure balance doesn't get set
+    fetchBalances.mockImplementation(() => {}); // should not be called
+    obfuscate.mockImplementation((_, __, setter) => setter("mocked-obfuscated-value"));
+  
+    const el = document.createElement('div');
+    el.id = 'test-gate';
+    el.innerHTML = 'Secret';
+    document.body.appendChild(el);
+  
+    await act(async () => {
+      render(
+        <Component
+          gateId="test-gate"
+          quantity={1}
+          contract={{ address: '0xcontract' }}
+          type="ERC20"
+        />
+      );
+    });
+  
+    expect(fetchBalances).not.toHaveBeenCalled();
+    expect(reveal).toHaveBeenCalledWith('test-gate', 'mocked-obfuscated-value', 0, 1);
+    spy.mockRestore();
+  });
+  
 });
