@@ -23,11 +23,11 @@ export const fetchBalances = (balanceType, address, contract, tokenId, setBalanc
     if (!address) return;
 
     if (balanceType === "ERC20") {
-      loadERC20Balance(contract, address, setBalance);
+        loadERC20Balance(contract, address, setBalance);
     } else if (balanceType === "ERC721") {
-      loadNFTBalance721(contract, address, setBalance);
+        loadNFTBalance721(contract, address, setBalance);
     } else if (balanceType === "ERC1155") {
-      loadNFTBalance1155(contract, address, tokenId, setBalance);
+        loadNFTBalance1155(contract, address, tokenId, setBalance);
     }
 }
 
@@ -41,8 +41,8 @@ export const obfuscate = (gateId, obfuscated, setter) => {
 
     setter(reversed);
     gatedEl.innerHTML = '';
-    gatedEl.classList.add("token-gated"); // ✅ Ensure it's hidden
-}
+    gatedEl.style.display = 'none'; // 👈 Inline style to hide
+};
 
 export const reveal = (gateId, obfuscated, balance, quantity) => {
     const gatedEl = document.getElementById(gateId);
@@ -51,9 +51,9 @@ export const reveal = (gateId, obfuscated, balance, quantity) => {
     if (balance >= parseInt(quantity)) {
         const decoded = atob(obfuscated.split("").reverse().join(""));
         gatedEl.innerHTML = decoded;
-        gatedEl.classList.remove("token-gated"); // ✅ Reveal gated section
+        gatedEl.style.display = 'block'; // 👈 Show on pass
     } else {
         gatedEl.innerHTML = '';
-        gatedEl.classList.add("token-gated"); // Just in case
+        gatedEl.style.display = 'none'; // 👈 Ensure it's hidden
     }
-}
+};

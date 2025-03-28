@@ -1,42 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Widget Test</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-gray-900 min-h-screen flex items-center justify-center">
   <div class="space-y-12 text-white">
     <div class="text-center">
       <h2 class="text-xl font-semibold mb-4">Connect Wallet</h2>
-      <div id="connect-button-demo" 
-           data-widget="ConnectButton"
-           data-client-id="e9bae73377d43e42aea12c0d07474163"
-           data-chains="43113,1,137"
-           data-theme="dark"
-           data-locale="en_US"
-           data-label="🔥Sign In"
-      >
+      <div id="connect-button-demo" data-widget="ConnectButton" data-client-id="e9bae73377d43e42aea12c0d07474163"
+        data-chains="43113,1,137" data-theme="dark" data-locale="en_US" data-label="🔥Sign In">
       </div>
     </div>
     <div class="text-center">
       <h2 class="text-xl font-semibold mb-4">Claim NFT</h2>
-      <div id="claim-button-demo" 
-           data-widget="ClaimButton"
-           data-client-id="e9bae73377d43e42aea12c0d07474163"
-           data-chains="43113"
-           data-theme="dark"
-           data-label="🔥Mint NFT!"
-           data-contract-address="0xeF155b056299Ba3e98987f37a2CB5518DE0a98F3"
-           data-type="ERC721"
-           data-quantity=1>
+      <div id="claim-button-demo" data-widget="ClaimButton" data-client-id="e9bae73377d43e42aea12c0d07474163"
+        data-chains="43113" data-theme="dark" data-label="🔥Mint NFT!"
+        data-contract-address="0xeF155b056299Ba3e98987f37a2CB5518DE0a98F3" data-type="ERC721" data-quantity=1>
       </div>
     </div>
+
+
+
+    <div class="text-center">
+      <h2 class="text-xl font-semibold mb-4">Token Gating ERC1155</h2>
+      <div id="token-gating1155-demo" data-widget="TokenGating" data-client-id="e9bae73377d43e42aea12c0d07474163"
+        data-chain="43113" data-gate-id="gated-content-1155"
+        data-contract-address="0xb5227A853421F78166211300CCC07FdB740725a8" data-quantity="2" data-token-id="0"
+        data-type="ERC1155">
+      </div>
+      <!-- Gated content -->
+      <div id="gated-content-1155" style="display: none;">
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+          <strong class="font-bold">ERC1155 Success!</strong>
+          <span class="block sm:inline">Only available for token gated users.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <h2 class="text-xl font-semibold mb-4">Token Gating ERC721</h2>
+      <div id="token-gating721-demo" data-widget="TokenGating" data-client-id="e9bae73377d43e42aea12c0d07474163"
+        data-chain="43113" data-gate-id="gated-content-721"
+        data-contract-address="0xeF155b056299Ba3e98987f37a2CB5518DE0a98F3" data-quantity="4" data-type="ERC721">
+      </div>
+      <!-- Gated content -->
+      <div id="gated-content-721" style="display: none;">
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+          <strong class="font-bold">ERC721 Success!</strong>
+          <span class="block sm:inline">Only available for token gated users.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <h2 class="text-xl font-semibold mb-4">Token Gating ERC20</h2>
+      <div id="token-gating20-demo" data-widget="TokenGating" data-client-id="e9bae73377d43e42aea12c0d07474163"
+        data-chain="43113" data-gate-id="gated-content-20"
+        data-contract-address="0x21A91F2888fD0a1f2ca653eeD2aa61Dc6910d79E" data-quantity="10000" data-type="ERC20">
+      </div>
+      <!-- Gated content -->
+      <div id="gated-content-20" style="display: none;">
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+          <strong class="font-bold">ERC20 Success!</strong>
+          <span class="block sm:inline">Only available for token gated users.</span>
+        </div>
+      </div>
+    </div>
+
+
   </div>
   <!-- For local testing before bundling -->
   <!-- <script type="module" src="./src/widgets.js"></script> -->
+  <!-- For local testing after bundling -->
+  <!-- <script type="module" src="./dist/widgets.js"></script> -->
   <!-- For CDN after bundling -->
-  <script type="module" src="./dist/widgets.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@dappify/thirdweb@next/dist/widgets.js"></script>
 </body>
+
 </html>

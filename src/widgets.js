@@ -1,6 +1,5 @@
 import { createRoot } from "react-dom/client";
 import { renderProvider } from "./provider.js";
-import { getRegisteredWidgets } from "./registry.js";
 
 let providerRoot = null;
 let providerContainer = null;
