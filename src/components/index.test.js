@@ -24,8 +24,13 @@ jest.mock('./token-gating.js', () => ({
   getComponent: jest.fn(() => jest.fn(() => 'TokenGatingComponent')),
 }));
 
+jest.mock('./direct-payment.js', () => ({
+  getProps: jest.fn(() => ({ prop3: 'value3' })),
+  getComponent: jest.fn(() => jest.fn(() => 'DirectPaymentComponent')),
+}));
+
 describe('Components Export', () => {
-  let ConnectButtonModule, ClaimButtonModule, TokenGatingModule, components;
+  let ConnectButtonModule, ClaimButtonModule, TokenGatingModule, DirectPaymentModule, components;
 
   beforeEach(() => {
     jest.resetModules();
@@ -35,11 +40,12 @@ describe('Components Export', () => {
     ConnectButtonModule = require('./connect-button.js');
     ClaimButtonModule = require('./claim-button.js');
     TokenGatingModule = require('./token-gating.js');
+    DirectPaymentModule = require('./direct-payment.js');
     ({ components } = require('./index.js'));
   });
 
   it('exports the correct number of components with expected structure', () => {
-    expect(components).toHaveLength(3);
+    expect(components).toHaveLength(4);
 
     expect(components[0]).toEqual({
       name: 'ConnectButton',
@@ -59,19 +65,28 @@ describe('Components Export', () => {
       getProps: TokenGatingModule.getProps,
     });
 
+    expect(components[3]).toEqual({
+      name: 'DirectPayment',
+      component: expect.any(Function),
+      getProps: DirectPaymentModule.getProps,
+    });
+
     // Verify that getComponent was called once per module
     expect(ConnectButtonModule.getComponent).toHaveBeenCalledTimes(1);
     expect(ClaimButtonModule.getComponent).toHaveBeenCalledTimes(1);
     expect(TokenGatingModule.getComponent).toHaveBeenCalledTimes(1);
+    expect(DirectPaymentModule.getComponent).toHaveBeenCalledTimes(1);
   });
 
   it('component functions return expected values', () => {
     const connectButtonFn = components[0].component;
     const claimButtonFn = components[1].component;
     const tokenGatingFn = components[2].component;
+    const directPaymentFn = components[3].component;
 
     expect(connectButtonFn()).toBe('ConnectButtonComponent');
     expect(claimButtonFn()).toBe('ClaimButtonComponent');
     expect(tokenGatingFn()).toBe('TokenGatingComponent');
+    expect(directPaymentFn()).toBe('DirectPaymentComponent');
   });
 });

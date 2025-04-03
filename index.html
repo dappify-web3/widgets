@@ -10,12 +10,23 @@
 
 <body class="bg-gray-900 min-h-screen flex items-center justify-center">
   <div class="space-y-12 text-white">
+    <!-- CONNECT WALLET -->
     <div class="text-center">
       <h2 class="text-xl font-semibold mb-4">Connect Wallet</h2>
       <div id="connect-button-demo" data-widget="ConnectButton" data-client-id="e9bae73377d43e42aea12c0d07474163"
         data-chains="43113,1,137" data-theme="dark" data-locale="en_US" data-label="🔥Sign In">
       </div>
     </div>
+    <!-- DIRECT PAYMENT -->
+    <div class="text-center">
+      <h2 class="text-xl font-semibold mb-4">Direct Payment</h2>
+      <div id="claim-button-demo" data-widget="DirectPayment" data-client-id="e9bae73377d43e42aea12c0d07474163"
+        data-chains="43113" data-theme="light" data-name="☕ Buy me a coffee"
+        data-seller-address="0x06bd1006C1ACd8f32ab9599B5608f789Cb22A4F7" data-amount="0.123"
+        data-image="https://pbs.twimg.com/profile_images/1905724846417543169/Qiewfer7_400x400.jpg">
+      </div>
+    </div>
+    <!-- CLAIM NFT -->
     <div class="text-center">
       <h2 class="text-xl font-semibold mb-4">Claim NFT</h2>
       <div id="claim-button-demo" data-widget="ClaimButton" data-client-id="e9bae73377d43e42aea12c0d07474163"
@@ -23,9 +34,7 @@
         data-contract-address="0xeF155b056299Ba3e98987f37a2CB5518DE0a98F3" data-type="ERC721" data-quantity=1>
       </div>
     </div>
-
-
-
+    <!-- TOKEN GATING 1155 -->
     <div class="text-center">
       <h2 class="text-xl font-semibold mb-4">Token Gating ERC1155</h2>
       <div id="token-gating1155-demo" data-widget="TokenGating" data-client-id="e9bae73377d43e42aea12c0d07474163"
@@ -41,7 +50,7 @@
         </div>
       </div>
     </div>
-
+    <!-- TOKEN GATING 721 -->
     <div class="text-center">
       <h2 class="text-xl font-semibold mb-4">Token Gating ERC721</h2>
       <div id="token-gating721-demo" data-widget="TokenGating" data-client-id="e9bae73377d43e42aea12c0d07474163"
@@ -56,7 +65,7 @@
         </div>
       </div>
     </div>
-
+    <!-- TOKEN GATING 20 -->
     <div class="text-center">
       <h2 class="text-xl font-semibold mb-4">Token Gating ERC20</h2>
       <div id="token-gating20-demo" data-widget="TokenGating" data-client-id="e9bae73377d43e42aea12c0d07474163"
@@ -69,9 +78,12 @@
           <strong class="font-bold">ERC20 Success!</strong>
           <span class="block sm:inline">Only available for token gated users.</span>
         </div>
+        <!-- Testing nested gated components -->
+        <iframe class="airtable-embed"
+          src="https://airtable.com/embed/appnaKcBzd4G0hrln/shrzgXxlFHoJDiWFk?viewControls=on" frameborder="0"
+          onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
       </div>
     </div>
-
 
   </div>
   <!-- For local testing before bundling -->
@@ -79,7 +91,7 @@
   <!-- For local testing after bundling -->
   <!-- <script type="module" src="./dist/widgets.js"></script> -->
   <!-- For CDN after bundling -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/@dappify/thirdweb@next/dist/widgets.js"></script> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/@dappify/thirdweb@latest/dist/widgets.js"></script> -->
 </body>
 
 </html>
